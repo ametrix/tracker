@@ -8,8 +8,6 @@ import threading
 import json
 from operator import itemgetter
 
-server = 'https://SERVER/record'
-
 class GpsSender(threading.Thread):
     delay = 5
 
@@ -131,6 +129,13 @@ class GpsReport:
 		print "Terminating!"
 		self.worker = None
 		quit()
+
+
+f = open('config.json')
+config = json.load(f)
+server = config["servers"][0]["server"]
+
+print "Server: " + server
 
 GpsReport = GpsReport()
 GpsReport.run()
